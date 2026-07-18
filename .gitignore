@@ -35,7 +35,8 @@ Thumbs.db
 # model/*.joblib
 # model/*.h5
 # model/*.keras
-model/**
+model/*/pipeline.pkl
+Real Estate Model/pipeline.pkl
 # ==========================
 # Logs
 # ==========================
