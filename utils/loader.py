@@ -65,16 +65,39 @@ PIPELINE_IDS = {
 }
 
 
+# def download_pipeline(city):
+#     pipeline_path = f"model/{city}/pipeline.pkl"
+
+#     if not os.path.exists(pipeline_path):
+#         os.makedirs(os.path.dirname(pipeline_path), exist_ok=True)
+
+#         gdown.download(
+#             id=PIPELINE_IDS[city],
+#             output=pipeline_path,
+#             quiet=False
+#         )
+
+
 def download_pipeline(city):
     pipeline_path = f"model/{city}/pipeline.pkl"
 
-    if not os.path.exists(pipeline_path):
-        os.makedirs(os.path.dirname(pipeline_path), exist_ok=True)
+    if os.path.exists(pipeline_path):
+        return
 
-        gdown.download(
-            id=PIPELINE_IDS[city],
-            output=pipeline_path,
-            quiet=False
+    os.makedirs(os.path.dirname(pipeline_path), exist_ok=True)
+
+    print(f"Downloading pipeline for {city}...")
+
+    url = f"https://drive.google.com/uc?id={PIPELINE_IDS[city]}"
+
+    output = gdown.download(url, pipeline_path, quiet=False)
+
+    print("Download output:", output)
+    print("File exists:", os.path.exists(pipeline_path))
+
+    if not os.path.exists(pipeline_path):
+        raise FileNotFoundError(
+            f"Failed to download pipeline from Google Drive for {city}."
         )
 
 
