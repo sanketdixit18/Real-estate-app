@@ -148,14 +148,16 @@ import urllib.request
 import pandas as pd
 
 
+
+
 PIPELINE_URLS = {
     "gurgaon": "https://github.com/sanketdixit18/Real-estate-app/releases/download/v1.0/pipeline.pkl"
 }
 
-
 def download_pipeline(city):
     pipeline_path = f"model/{city}/pipeline.pkl"
 
+    # Already downloaded
     if os.path.exists(pipeline_path):
         return
 
@@ -168,11 +170,15 @@ def download_pipeline(city):
             PIPELINE_URLS[city],
             pipeline_path
         )
-    except Exception as e:
-        raise Exception(f"Failed to download pipeline: {e}")
+        print("Pipeline downloaded successfully.")
 
-    if not os.path.exists(pipeline_path):
-        raise FileNotFoundError("pipeline.pkl was not downloaded successfully.")
+    except Exception as e:
+        raise RuntimeError(f"Failed to download pipeline: {e}")
+
+    if not os.path.isfile(pipeline_path):
+        raise FileNotFoundError(
+            f"{pipeline_path} was not downloaded successfully."
+        )
 
 
 def load_city(city):
