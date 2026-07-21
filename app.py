@@ -14,21 +14,22 @@ st.set_page_config(
 # CITY DATA — add a new dict here to support another city, no HTML editing needed
 # ---------------------------------------------------------------------------
 CITIES = [
-    {
-        "emoji": "🌆",
-        "name": "Mumbai",
-        "tag": "Location-based Model",
-        "points": [
-            "Apartments & independent houses",
-            "Location-wise price prediction",
-            "Area (sq. ft.) driven analysis",
-            "Market insight visualizations",
-        ],
-    },
+    # {
+    #     "emoji": "🌆",
+    #     "name": "Mumbai",
+    #     "tag": "Location-based Model",
+    #     "points": [
+    #         "Apartments & independent houses",
+    #         "Location-wise price prediction",
+    #         "Area (sq. ft.) driven analysis",
+    #         "Market insight visualizations",
+    #     ],
+    # },
     {
         "emoji": "🏙️",
         "name": "Gurgaon",
         "tag": "Sector-based Model",
+        "status": "active",
         "points": [
             "Apartments & independent floors",
             "Sector-wise price prediction",
@@ -36,6 +37,19 @@ CITIES = [
             "Price trend analysis",
         ],
     },
+    {
+        "emoji": "🚀",
+        "name": "Upcoming Cities",
+        "tag": "Future Expansion",
+        "status": "coming_soon",
+        "points": [
+            "Mumbai",
+            "Bengaluru",
+            "Delhi NCR",
+            "Hyderabad",
+            "Pune",
+        ],
+    }
     # {
     #     "emoji": "🏢",
     #     "name": "Pune",
@@ -202,8 +216,15 @@ st.markdown("""
 # ---------------------------------------------------------------------------
 # HERO SECTION
 # ---------------------------------------------------------------------------
-city_names = " and ".join([c["name"] for c in CITIES[:2]]) if len(CITIES) <= 2 else \
-    ", ".join([c["name"] for c in CITIES[:-1]]) + f", and {CITIES[-1]['name']}"
+# city_names = " and ".join([c["name"] for c in CITIES[:2]]) if len(CITIES) <= 2 else \
+#     ", ".join([c["name"] for c in CITIES[:-1]]) + f", and {CITIES[-1]['name']}"
+
+active_cities = [
+    c["name"] for c in CITIES 
+    if c["status"] == "active"
+]
+
+city_names = ", ".join(active_cities)
 
 st.markdown(f"""
 <div class="hero">
@@ -229,12 +250,15 @@ st.markdown(f"""
 # ---------------------------------------------------------------------------
 st.markdown('<div class="section-title">📌 Project Snapshot</div>', unsafe_allow_html=True)
 
-metric_cols = st.columns(4)
+metric_cols = st.columns(5)
 metrics = [
-    ("R² Score", "0.XX"),
-    ("Properties Analyzed", "X,XXX+"),
-    ("Cities Covered", str(len(CITIES))),
-    ("Features Engineered", "XX+"),
+    ("R² Score", "97.8%"),
+    ("MAE", "₹18 Lakh"),
+    ("Properties Analyzed", "5k+"),
+    # ("Cities Covered", str(len(CITIES))),
+    ("Cities Covered", str(len(active_cities))),
+    ("Features Engineered", "20+"),
+    
 ]
 for (label, value), col in zip(metrics, metric_cols):
     with col:
@@ -245,7 +269,7 @@ for (label, value), col in zip(metrics, metric_cols):
         </div>
         """, unsafe_allow_html=True)
 
-st.caption("⚠️ Update these numbers with your actual model performance (R², MAE, dataset size) before publishing.")
+# st.caption("⚠️ Update these numbers with your actual model performance (R², MAE, dataset size) before publishing.")
 
 # ---------------------------------------------------------------------------
 # CITY CARDS — auto-generated from the CITIES list above, 2 per row.
@@ -300,12 +324,12 @@ st.markdown("""
 st.markdown("""
 <div class="dev-card">
     <h3>👋 Built by Sanket Dixit</h3>
-    <p>Computer Engineering student (Data Science & Analytics) — building applied ML projects
+    <p>Computer Engineering student (Data Science) — building applied ML projects
     focused on real-world, structured data problems.</p>
     <p>
         🔗 <a href="https://linkedin.com/in/sanket-dixit-85983a243" target="_blank">LinkedIn Profile</a>
         &nbsp;&nbsp;|&nbsp;&nbsp;
-        💻 <a href="#" target="_blank">GitHub Repository (add link)</a>
+        💻 <a href="https://github.com/sanketdixit18/Real-estate-app" target="_blank">GitHub Repository </a>
     </p>
 </div>
 """, unsafe_allow_html=True)
