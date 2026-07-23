@@ -63,7 +63,7 @@ A Machine Learning web application that predicts property prices and recommends 
 ### Price Prediction
 - Linear Regression
 - Random Forest
-- XGBoost (if used)
+
 
 ### Recommendation
 - Cosine Similarity
@@ -72,6 +72,7 @@ A Machine Learning web application that predicts property prices and recommends 
 ---
 
 ## 📸 Screenshots
+![Uploading screencapture-real-estate-app-mzzm9zau7odpkprgrrgxru-streamlit-app-Dashboard-2026-07-23-21_46_16.png…]()
 
 (Add screenshots here)
 
